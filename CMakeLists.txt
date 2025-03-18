@@ -20,6 +20,9 @@ set(PROJECT_SOURCES
     Random_picker.ui
     Random_picker.h
     Random_picker.cpp
+    Settings_window.ui
+    Settings_window.h
+    Settings_window.cpp
 )
 
 qt_add_executable(Random_name_picker ${PROJECT_SOURCES})
