@@ -33,5 +33,6 @@ void SettingsWindow::on_buttonBox_accepted()
 	else
 		throw std::runtime_error("Settings file write error");
 	settings_file.close();
+	main_window->read_settings();
 	this->close();
 }
