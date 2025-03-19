@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(Random_name_picker LANGUAGES CXX)
+project(Random_num_picker LANGUAGES CXX)
 
 include(qt.cmake)
 
@@ -25,14 +25,14 @@ set(PROJECT_SOURCES
     Settings_window.cpp
 )
 
-qt_add_executable(Random_name_picker ${PROJECT_SOURCES})
+qt_add_executable(Random_num_picker ${PROJECT_SOURCES})
 
-set_target_properties(Random_name_picker
+set_target_properties(Random_num_picker
     PROPERTIES
         WIN32_EXECUTABLE TRUE
 )
 
-target_link_libraries(Random_name_picker
+target_link_libraries(Random_num_picker
     PUBLIC
         Qt::Core
         Qt::Gui

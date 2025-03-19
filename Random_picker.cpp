@@ -24,7 +24,7 @@ void Random_picker::read_settings()
 				exclude_nums.push_back(num);
 				num = 0;
 			}
-			else if (curr == '\n' || curr == EOF)
+			else if (curr == '\n')
 			{
 				exclude_nums.push_back(num);
 				break;
@@ -35,6 +35,8 @@ void Random_picker::read_settings()
 				if (temp > 9 || temp < 0)
 					throw std::runtime_error("Settings file read error - exclude list num error");
 				num = num * 10 + temp;
+				if (count == exclude_str.length() - 1)
+					exclude_nums.push_back(num);
 			}
 			count++;
 		}
