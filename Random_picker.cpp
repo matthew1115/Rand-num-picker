@@ -18,11 +18,13 @@ void Random_picker::read_settings()
 		int count = 0;
 		while (count < exclude_str.length())
 		{
+			bool flag_new_end = false;
 			char curr = exclude_str[count];
-			if (curr == ',' || curr == ' ')
+			if (curr == ',' || curr == '£¬' || curr == ';' || (curr == ' ' && !flag_new_end))
 			{
 				exclude_nums.push_back(num);
 				num = 0;
+				flag_new_end = true;
 			}
 			else if (curr == '\n')
 			{
@@ -31,9 +33,15 @@ void Random_picker::read_settings()
 			}
 			else
 			{
+				flag_new_end = false;
 				temp = curr - '0';
 				if (temp > 9 || temp < 0)
+				{
+					QMessageBox popup;
+					popup.setWindowFlags(Qt::WindowStaysOnTopHint);
+					popup.setText("Settings file read error - exclude list num error");
 					throw std::runtime_error("Settings file read error - exclude list num error");
+				}
 				num = num * 10 + temp;
 				if (count == exclude_str.length() - 1)
 					exclude_nums.push_back(num);
