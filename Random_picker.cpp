@@ -10,26 +10,25 @@ void Random_picker::read_settings()
 	std::fstream settings_file("settings.txt", std::ios::in);
 	if (settings_file.is_open())
 	{
-		settings_file >> min >> max;
 		std::string exclude_str;
-		settings_file >> exclude_str;
+		settings_file >> min >> max;
+		settings_file.ignore();
+		std::getline(settings_file, exclude_str);
 		int temp;
 		int num = 0;
 		int count = 0;
+		bool flag_new_end = false;
 		while (count < exclude_str.length())
 		{
-			bool flag_new_end = false;
 			char curr = exclude_str[count];
-			if (curr == ',' || curr == '£¬' || curr == ';' || (curr == ' ' && !flag_new_end))
+			if (curr == ',' || curr == '£¬' || curr == ';' || curr == ' ' || curr == '\n')
 			{
-				exclude_nums.push_back(num);
-				num = 0;
-				flag_new_end = true;
-			}
-			else if (curr == '\n')
-			{
-				exclude_nums.push_back(num);
-				break;
+				if (!flag_new_end)
+				{
+					exclude_nums.push_back(num);
+					num = 0;
+					flag_new_end = true;
+				}
 			}
 			else
 			{
